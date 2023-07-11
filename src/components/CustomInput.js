@@ -1,14 +1,16 @@
 import React from "react";
 
-const CustomInput = ({ name, type, classname, placeholder, id }) => {
+const CustomInput = ({ name, type, classname, id, label }) => {
   return (
-    <input
-      type={type}
-      name={name}
-      class={`form-control ${classname}`}
-      id={id}
-      placeholder={placeholder}
-    />
+    <div class="form-floating mb-3">
+      <input
+        type={type}
+        name={name}
+        class={`form-control ${classname}`}
+        id={id}
+      />
+      <label htmlFor={id}>{label}</label>
+    </div>
   );
 };
 
