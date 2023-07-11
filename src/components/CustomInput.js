@@ -2,7 +2,7 @@ import React from "react";
 
 const CustomInput = ({ name, type, classname, id, label, placeholder }) => {
   return (
-    <div class="form-floating mb-3">
+    <div className="form-floating mb-3">
       <input
         type={type}
         name={name}
