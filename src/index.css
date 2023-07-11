@@ -62,10 +62,16 @@ code {
 .ant-layout-sider-collapsed .sm-logo {
   display: block;
 }
-.main {
+main {
   overflow-y: scroll;
+  background: transparent !important;
 }
-
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
 .ant-menu-title-content {
   font-size: 16px;
   line-height: 1.5;
