@@ -72,9 +72,11 @@ code {
 }
 .ant-layout-header h5 {
   line-height: 1.5;
+  font-size: 14px;
 }
 .ant-layout-header p {
   line-height: 1;
+  font-size: 13px;
 }
 .user-img {
   width: 40px;

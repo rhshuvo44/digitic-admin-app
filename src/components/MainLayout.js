@@ -11,6 +11,7 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
+import { IoIosNotifications } from "react-icons/io";
 import { FaBloggerB, FaClipboardList } from "react-icons/fa";
 import { ImBlog } from "react-icons/im";
 import { SiBrandfolder } from "react-icons/si";
@@ -157,7 +158,15 @@ const MainLayout = () => {
             }}
           />
           <div className="d-flex gap-3 align-items-center ">
-            <div></div>
+            <div className="position-relative">
+              <IoIosNotifications className="fs-5" />
+              <span
+                style={{ top: "3px", right: "0px" }}
+                className="badge bg-warning rounded-circle p-1 position-absolute"
+              >
+                3
+              </span>
+            </div>
             <div className="d-flex gap-3 align-items-center">
               <div>
                 <img
