@@ -65,3 +65,19 @@ code {
 .main {
   overflow-y: scroll;
 }
+
+.ant-menu-title-content {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.ant-layout-header h5 {
+  line-height: 1.5;
+}
+.ant-layout-header p {
+  line-height: 1;
+}
+.user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}

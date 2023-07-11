@@ -1,4 +1,3 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Content, Header } from "antd/es/layout/layout";
@@ -6,14 +5,16 @@ import React, { useState } from "react";
 import {
   AiOutlineBgColors,
   AiOutlineDashboard,
+  AiOutlinePicLeft,
+  AiOutlinePicRight,
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from "react-icons/ai";
-import { SiBrandfolder } from "react-icons/si";
-import { ImBlog } from "react-icons/im";
 import { BiCategoryAlt } from "react-icons/bi";
 import { FaBloggerB, FaClipboardList } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { ImBlog } from "react-icons/im";
+import { SiBrandfolder } from "react-icons/si";
+import { Outlet, useNavigate } from "react-router-dom";
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -139,6 +140,7 @@ const MainLayout = () => {
       </Sider>
       <Layout>
         <Header
+          className="d-flex justify-content-between ps-3 pe-5"
           style={{
             padding: 0,
             background: colorBgContainer,
@@ -146,7 +148,7 @@ const MainLayout = () => {
         >
           <Button
             type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            icon={collapsed ? <AiOutlinePicRight /> : <AiOutlinePicLeft />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: "16px",
@@ -154,6 +156,22 @@ const MainLayout = () => {
               height: 64,
             }}
           />
+          <div className="d-flex gap-3 align-items-center ">
+            <div></div>
+            <div className="d-flex gap-3 align-items-center">
+              <div>
+                <img
+                  src="https://i.ibb.co/CJV0T8Y/ripon.jpg"
+                  className="img-fulid user-img"
+                  alt=""
+                />
+              </div>
+              <div>
+                <h5 className="mb-0">Ripon</h5>
+                <p className="mb-0">riponh121@gmail.com</p>
+              </div>
+            </div>
+          </div>
         </Header>
         <Content
           style={{
@@ -163,7 +181,7 @@ const MainLayout = () => {
             background: colorBgContainer,
           }}
         >
-          Content
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
