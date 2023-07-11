@@ -13,8 +13,15 @@ const Login = () => {
           Login to your account to continue
         </p>
         <form action="">
-          <CustomInput type="email" name="email" id="email" label="Email" />
           <CustomInput
+            type="email"
+            name="email"
+            id="email"
+            label="Email"
+            placeholder="Email"
+          />
+          <CustomInput
+            placeholder="Password"
             type="password"
             name="password"
             id="password"
