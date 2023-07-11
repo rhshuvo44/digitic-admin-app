@@ -10,3 +10,31 @@ body {
 code {
   font-family: s "Roboto", sans-serif;
 }
+
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+.logo {
+  height: 32px;
+  margin: 16px;
+  /* padding: 5px; */
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  /* background: rgba(255, 255, 255, 0.3); */
+}
+.ant-layout {
+  min-height: 100vh;
+}
+.form-control:focus {
+  border-color: rgba(19, 38, 77, 0.2);
+  box-shadow: 0 0 0 3px rgba(19, 38, 77, 0.125);
+}
