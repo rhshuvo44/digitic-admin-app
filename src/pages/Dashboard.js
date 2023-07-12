@@ -5,30 +5,29 @@ import { BsArrowDownRight, BsArrowUpRight } from "react-icons/bs";
 
 const columns = [
   {
+    title: "SNo",
+    dataIndex: "key",
+  },
+  {
     title: "Name",
     dataIndex: "name",
   },
   {
-    title: "Age",
-    dataIndex: "age",
+    title: "Product",
+    dataIndex: "product",
   },
   {
-    title: "Address",
-    dataIndex: "address",
-  },
-  {
-    title: "Number",
-    dataIndex: "number",
+    title: "Status",
+    dataIndex: "status",
   },
 ];
 const data1 = [];
-for (let i = 0; i < 46; i++) {
+for (let i = 0; i < 16; i++) {
   data1.push({
-    key: i,
+    key: i + 1,
     name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-    number: +8801784587644,
+    product: `London, Park Lane no. ${i}`,
+    status: "Pandding",
   });
 }
 const Dashboard = () => {

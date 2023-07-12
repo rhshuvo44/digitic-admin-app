@@ -64,12 +64,16 @@ code {
 }
 main {
   overflow-y: scroll;
+  height: 85vh;
   background: transparent !important;
 }
-.red{
+main::-webkit-scrollbar {
+  width: 0px;
+}
+.red {
   color: red;
 }
-.green{
+.green {
   color: green;
 }
 .ant-menu-title-content {
