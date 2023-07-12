@@ -76,6 +76,17 @@ main::-webkit-scrollbar {
 .green {
   color: green;
 }
+.quill {
+  background: white;
+  height: 200px;
+}
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+.ql-container.ql-snow {
+  border: none;
+}
 .ant-menu-title-content {
   font-size: 16px;
   line-height: 1.5;
