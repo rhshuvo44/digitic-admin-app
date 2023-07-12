@@ -3,9 +3,8 @@ import CustomInput from "../components/CustomInput";
 
 const AddBlogCat = () => {
   return (
-    <div>
-      <h3 className="mb-4">Add Blog</h3>
-
+    <section>
+      <h3 className="mb-4">Add Blog Category</h3>
       <form action="">
         <CustomInput
           type="text"
@@ -19,7 +18,7 @@ const AddBlogCat = () => {
           Add Blog Category
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 
