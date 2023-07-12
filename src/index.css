@@ -10,7 +10,15 @@ body {
 code {
   font-family: s "Roboto", sans-serif;
 }
-
+:root {
+  --color-212529: #212529;
+  --color-ffd333: #ffd333;
+  --color-47ad24: #47ad24;
+  --color-e52e2e: #e52e2e;
+  --color-828599: #828599;
+  --color-ed464d: #ed464d;
+  --color-c3d4da: #c3d4da;
+}
 .trigger {
   padding: 0 24px;
   font-size: 18px;
@@ -25,7 +33,7 @@ code {
 .logo-vertical {
   height: 64px;
   margin: 16px;
-  background: #ffd333;
+  background: var(--color-ffd333);
   border-radius: 3px;
 }
 .sm-logo {
@@ -40,9 +48,24 @@ code {
 .ant-layout {
   min-height: 100vh;
 }
-.form-control:focus {
-  border-color: rgba(19, 38, 77, 0.2);
-  box-shadow: 0 0 0 3px rgba(19, 38, 77, 0.125);
+.form-control {
+  box-shadow: none;
+  border-color: var(--color-c3d4da);
+}
+.title {
+  font-size: 28px;
+  font-family: Roboto !important;
+  color: var(--color-212529);
+}
+.subtitle {
+  font-size: 24px;
+  font-family: Roboto !important;
+  color: var(--color-212529);
+}
+.desc {
+  font-size: 14px;
+  font-family: Roboto !important;
+  color: var(--color-828599);
 }
 .ant-layout-sider {
   flex: 0 0 250px !important;
@@ -71,10 +94,14 @@ main::-webkit-scrollbar {
   width: 0px;
 }
 .red {
-  color: red;
+  color: var(--color-e52e2e);
+  font-size: 14px;
+  font-family: Roboto !important;
 }
 .green {
-  color: green;
+  color: var(--color-47ad24);
+  font-size: 14px;
+  font-family: Roboto !important;
 }
 .quill {
   background: white;
@@ -82,7 +109,7 @@ main::-webkit-scrollbar {
 }
 .ql-toolbar.ql-snow {
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--color-c3d4da);
 }
 .ql-container.ql-snow {
   border: none;
@@ -103,4 +130,9 @@ main::-webkit-scrollbar {
   width: 40px;
   height: 40px;
   border-radius: 5px;
+}
+.dropdown-menu {
+  inset: 15px auto auto 0px !important;
+  line-height: 1.5;
+  border: none;
 }

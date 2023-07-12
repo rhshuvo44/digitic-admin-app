@@ -30,12 +30,12 @@ for (let i = 0; i < 16; i++) {
 
 const Order = () => {
   return (
-    <div>
-      <h3 className="mb-4">Orders</h3>
+    <section>
+      <h3 className="mb-4 title">Orders</h3>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
-    </div>
+    </section>
   );
 };
 

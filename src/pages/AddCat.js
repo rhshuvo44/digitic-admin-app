@@ -4,7 +4,7 @@ import CustomInput from "../components/CustomInput";
 const AddCat = () => {
   return (
     <section>
-      <h3 className="mb-4">Add Product Category</h3>
+      <h3 className="mb-4 title">Add Product Category</h3>
       <form action="">
         <CustomInput
           type="text"

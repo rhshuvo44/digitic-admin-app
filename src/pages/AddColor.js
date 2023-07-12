@@ -4,7 +4,7 @@ import CustomInput from "../components/CustomInput";
 const AddColor = () => {
   return (
     <section>
-      <h3 className="mb-4">Add Color</h3>
+      <h3 className="mb-4 title">Add Color</h3>
       <form action="">
         <CustomInput
           type="text"

@@ -15,7 +15,7 @@ import { IoIosNotifications } from "react-icons/io";
 import { FaBloggerB, FaClipboardList } from "react-icons/fa";
 import { ImBlog } from "react-icons/im";
 import { SiBrandfolder } from "react-icons/si";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -175,9 +175,23 @@ const MainLayout = () => {
                   alt=""
                 />
               </div>
-              <div>
-                <h5 className="mb-0">Ripon</h5>
-                <p className="mb-0">riponh121@gmail.com</p>
+              <div className="dropdown">
+                <span
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <h5 className="mb-0">Ripon</h5>
+                  <p className="mb-0">riponh121@gmail.com</p>
+                </span>
+                <div class="dropdown-menu">
+                  <Link to="/" class="dropdown-item">
+                    View Profile
+                  </Link>
+                  <Link to="/" class="dropdown-item">
+                    Signout
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

@@ -29,12 +29,12 @@ for (let i = 0; i < 16; i++) {
 }
 const Customer = () => {
   return (
-    <div>
-      <h3 className="mb-4">Customers List</h3>
+    <section>
+      <h3 className="mb-4 title">Customers List</h3>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
-    </div>
+    </section>
   );
 };
 
