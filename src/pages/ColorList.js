@@ -1,5 +1,7 @@
 import { Table } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getColors } from "../features/color/colorSlice";
 const columns = [
   {
     title: "SNo",
@@ -8,36 +10,32 @@ const columns = [
   {
     title: "Name",
     dataIndex: "name",
-  },
-  {
-    title: "Product",
-    dataIndex: "product",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
+    sorter: (a, b) => a.name.length - b.name.length,
   },
 ];
-const data = [];
-for (let i = 0; i < 16; i++) {
-  data.push({
-    key: i + 1,
-    name: `Edward King ${i}`,
-    product: `London, Park Lane no. ${i}`,
-    status: "Pandding",
-  });
-}
-
 
 const ColorList = () => {
-    return (
-        <section>
-        <h3 className="mb-4 title">Color List</h3>
-        <div>
-          <Table columns={columns} dataSource={data} />
-        </div>
-      </section>
-    );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getColors());
+  }, [dispatch]);
+  const colorState = useSelector((state) => state?.color?.colors?.getallColor);
+  console.log(colorState);
+  const data = [];
+  for (let i = 0; i < colorState?.length; i++) {
+    data.push({
+      key: i + 1,
+      name: colorState[i].title,
+    });
+  }
+  return (
+    <section>
+      <h3 className="mb-4 title">Color List</h3>
+      <div>
+        <Table columns={columns} dataSource={data} />
+      </div>
+    </section>
+  );
 };
 
 export default ColorList;

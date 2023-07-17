@@ -3,7 +3,6 @@ import categoryService from "./categoryServices";
 
 const initialState = {
   categorys: [],
-  orders: [],
   isError: false,
   isLoading: false,
   isSuccess: false,

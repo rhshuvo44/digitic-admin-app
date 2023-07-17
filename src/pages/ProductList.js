@@ -12,26 +12,30 @@ const columns = [
   {
     title: "Name",
     dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
   },
   {
     title: "Brand",
     dataIndex: "brand",
+    sorter: (a, b) => a.brand.length - b.brand.length,
   },
   {
     title: "Category",
     dataIndex: "category",
+    sorter: (a, b) => a.category.length - b.category.length,
   },
   {
     title: "Price",
     dataIndex: "price",
+    sorter: (a, b) => a.price - b.price,
   },
   {
-    title: "Edit",
-    dataIndex: "edit",
+    title: "Color",
+    dataIndex: "color",
   },
   {
-    title: "Delete",
-    dataIndex: "delete",
+    title: "Action",
+    dataIndex: "action",
   },
 ];
 
@@ -50,15 +54,18 @@ const ProductList = () => {
       brand: productState[i].brand,
       category: productState[i].category,
       price: productState[i].price,
-
-      edit: (
-        <BiEdit className="text-success fs-5 " style={{ cursor: "pointer" }} />
-      ),
-      delete: (
-        <AiFillDelete
-          className="text-danger fs-5"
-          style={{ cursor: "pointer" }}
-        />
+      color: productState[i].color,
+      action: (
+        <>
+          <BiEdit
+            className="text-success fs-5 me-2"
+            style={{ cursor: "pointer" }}
+          />
+          <AiFillDelete
+            className="text-danger fs-5"
+            style={{ cursor: "pointer" }}
+          />
+        </>
       ),
     });
   }

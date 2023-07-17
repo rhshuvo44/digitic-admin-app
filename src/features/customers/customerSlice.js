@@ -3,7 +3,6 @@ import customerService from "./customerService";
 
 const initialState = {
   customers: [],
-  orders: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
