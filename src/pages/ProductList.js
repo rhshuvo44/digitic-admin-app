@@ -1,7 +1,9 @@
 import { Table } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../features/product/productSlice";
 const columns = [
   {
     title: "SNo",
@@ -12,8 +14,16 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "Product",
-    dataIndex: "product",
+    title: "Brand",
+    dataIndex: "brand",
+  },
+  {
+    title: "Category",
+    dataIndex: "category",
+  },
+  {
+    title: "Price",
+    dataIndex: "price",
   },
   {
     title: "Edit",
@@ -24,18 +34,28 @@ const columns = [
     dataIndex: "delete",
   },
 ];
-const data = [];
-for (let i = 0; i < 16; i++) {
-  data.push({
-    key: i + 1,
-    name: `Edward King ${i}`,
-    product: `London, Park Lane no. ${i}`,
-    edit: <BiEdit className="text-success fs-5"/>,
-    delete: <AiFillDelete className="text-danger fs-5"/>,
-  });
-}
 
 const ProductList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+  const productState = useSelector((state) => state.product.products);
+
+  const data = [];
+  for (let i = 0; i < productState.length; i++) {
+    data.push({
+      key: i + 1,
+      name: productState[i].title,
+      brand: productState[i].brand,
+      category: productState[i].category,
+      price: productState[i].price,
+
+      edit: <BiEdit className="text-success fs-5" />,
+      delete: <AiFillDelete className="text-danger fs-5" />,
+    });
+  }
+  console.log(data);
   return (
     <section>
       <h3 className="mb-4 title">Product List</h3>
