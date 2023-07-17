@@ -51,8 +51,15 @@ const ProductList = () => {
       category: productState[i].category,
       price: productState[i].price,
 
-      edit: <BiEdit className="text-success fs-5" />,
-      delete: <AiFillDelete className="text-danger fs-5" />,
+      edit: (
+        <BiEdit className="text-success fs-5 " style={{ cursor: "pointer" }} />
+      ),
+      delete: (
+        <AiFillDelete
+          className="text-danger fs-5"
+          style={{ cursor: "pointer" }}
+        />
+      ),
     });
   }
   console.log(data);

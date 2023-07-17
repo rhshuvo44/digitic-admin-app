@@ -1,5 +1,7 @@
 import { Table } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategorys } from "../features/category/categorySlice";
 const columns = [
   {
     title: "SNo",
@@ -18,18 +20,26 @@ const columns = [
     dataIndex: "status",
   },
 ];
-const data = [];
-for (let i = 0; i < 16; i++) {
-  data.push({
-    key: i + 1,
-    name: `Edward King ${i}`,
-    product: `London, Park Lane no. ${i}`,
-    status: "Pandding",
-  });
-}
 
 
 const BrandList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategorys());
+  }, [dispatch]);
+  const customerState = useSelector((state) => state.customer.customers);
+  const data = [];
+  for (let i = 0; i < customerState.length; i++) {
+    if (customerState[i].role === "admin") {
+      data.push({
+        key: i + 1,
+        name: customerState[i].firstname + " " + customerState[i].lastname,
+
+        email: customerState[i].email,
+        mobile: customerState[i].mobile,
+      });
+    }
+  }
     return (
         <section>
       <h3 className="mb-4 title">Brand List</h3>

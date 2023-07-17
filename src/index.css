@@ -111,6 +111,7 @@ main::-webkit-scrollbar {
 .quill {
   background: white;
   height: 200px;
+  
 }
 .ql-toolbar.ql-snow {
   border: none;
