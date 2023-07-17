@@ -8,8 +8,8 @@ const columns = [
     dataIndex: "key",
   },
   {
-    title: "Title",
-    dataIndex: "title",
+    title: "Name",
+    dataIndex: "name",
   },
 ];
 
@@ -19,13 +19,13 @@ const CategoryList = () => {
     dispatch(getCategorys());
   }, [dispatch]);
   const categoryState = useSelector(
-    (state) => state.category.categorys.getallCategory
+    (state) => state?.category?.categorys?.getallCategory
   );
   const data = [];
-  for (let i = 0; i < categoryState.length; i++) {
+  for (let i = 0; i < categoryState?.length; i++) {
     data.push({
       key: i + 1,
-      title: categoryState[i].title,
+      name: categoryState[i].title,
     });
   }
   return (
