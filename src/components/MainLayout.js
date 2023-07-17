@@ -184,11 +184,11 @@ const MainLayout = () => {
                   <h5 className="mb-0">Ripon</h5>
                   <p className="mb-0">riponh121@gmail.com</p>
                 </span>
-                <div class="dropdown-menu">
-                  <Link to="/" class="dropdown-item">
+                <div className="dropdown-menu">
+                  <Link to="/" className="dropdown-item">
                     View Profile
                   </Link>
-                  <Link to="/" class="dropdown-item">
+                  <Link to="/" className="dropdown-item">
                     Signout
                   </Link>
                 </div>

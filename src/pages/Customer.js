@@ -1,33 +1,46 @@
 import { Table } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../features/customers/customerSlice";
 const columns = [
   {
     title: "SNo",
     dataIndex: "key",
   },
+
   {
     title: "Name",
     dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
   },
   {
-    title: "Product",
-    dataIndex: "product",
+    title: "Email",
+    dataIndex: "email",
   },
   {
-    title: "Status",
-    dataIndex: "status",
+    title: "Mobile",
+    dataIndex: "mobile",
   },
 ];
-const data = [];
-for (let i = 0; i < 16; i++) {
-  data.push({
-    key: i + 1,
-    name: `Edward King ${i}`,
-    product: `London, Park Lane no. ${i}`,
-    status: "Pandding",
-  });
-}
+
 const Customer = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+  const customerState = useSelector((state) => state.customer.customers);
+  const data = [];
+  for (let i = 0; i < customerState.length; i++) {
+    if (customerState[i].role === "admin") {
+      data.push({
+        key: i + 1,
+        name: customerState[i].firstname + " " + customerState[i].lastname,
+
+        email: customerState[i].email,
+        mobile: customerState[i].mobile,
+      });
+    }
+  }
   return (
     <section>
       <h3 className="mb-4 title">Customers List</h3>
