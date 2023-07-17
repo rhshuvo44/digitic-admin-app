@@ -103,6 +103,11 @@ main::-webkit-scrollbar {
   font-size: 14px;
   font-family: Roboto !important;
 }
+.error {
+  color: var(--color-e52e2e);
+  font-size: 12px;
+  font-family: Roboto !important;
+}
 .quill {
   background: white;
   height: 200px;
