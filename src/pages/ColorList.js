@@ -26,7 +26,7 @@ const ColorList = () => {
     dispatch(getColors());
   }, [dispatch]);
   const colorState = useSelector((state) => state?.color?.colors?.getallColor);
-  console.log(colorState);
+
   const data = [];
   for (let i = 0; i < colorState?.length; i++) {
     data.push({
