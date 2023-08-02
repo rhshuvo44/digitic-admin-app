@@ -54,7 +54,7 @@ const ProductList = () => {
       brand: productState[i].brand,
       category: productState[i].category,
       price: productState[i].price,
-      color: productState[i].color,
+      color: productState[i].color + " ",
       action: (
         <>
           <BiEdit

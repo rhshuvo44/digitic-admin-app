@@ -1,5 +1,6 @@
 import { Button, Layout, Menu, theme } from "antd";
 import Sider from "antd/es/layout/Sider";
+
 import { Content, Header } from "antd/es/layout/layout";
 import React, { useState } from "react";
 import {
@@ -11,11 +12,13 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
-import { IoIosNotifications } from "react-icons/io";
 import { FaBloggerB, FaClipboardList } from "react-icons/fa";
 import { ImBlog } from "react-icons/im";
+import { IoIosNotifications } from "react-icons/io";
 import { SiBrandfolder } from "react-icons/si";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -105,7 +108,7 @@ const MainLayout = () => {
               label: "Order",
             },
             {
-              key: "blog",
+              key: "blogs",
               icon: <FaBloggerB className="fs-4" />,
               label: "Blogs",
               children: [
@@ -204,6 +207,17 @@ const MainLayout = () => {
             background: colorBgContainer,
           }}
         >
+          <ToastContainer
+            position="top-right"
+            autoClose={250}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            theme="light"
+          />
           <Outlet />
         </Content>
       </Layout>

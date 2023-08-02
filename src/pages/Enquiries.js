@@ -1,8 +1,8 @@
 import { Table } from "antd";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getEnduiries } from "../features/enquiries/enduirieSlice";
 import { AiFillDelete } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { getEnquiries } from "../features/enquiries/enquirieSlice";
 const columns = [
   {
     title: "SNo",
@@ -34,7 +34,7 @@ const columns = [
 const Enquiries = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getEnduiries());
+    dispatch(getEnquiries());
   }, [dispatch]);
   const enduirieState = useSelector(
     (state) => state?.enduirie?.enduiries.getallEnquiry

@@ -1,40 +1,40 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import enduirieService from "./enduirieService";
+import enquirieService from "./enquirieService";
 
 const initialState = {
-  enduiries: [],
+  enquiries: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
   message: "",
 };
-export const getEnduiries = createAsyncThunk(
+export const getEnquiries = createAsyncThunk(
   "enduirie/get-enduiries",
   async (thunkAPI) => {
     try {
-      return await enduirieService.getEnduiries();
+      return await enquirieService.getEnquiries();
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
-export const enduirieSlice = createSlice({
-  name: "enduiries",
+export const enquirieSlice = createSlice({
+  name: "enquiries",
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getEnduiries.pending, (state) => {
+      .addCase(getEnquiries.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getEnduiries.fulfilled, (state, action) => {
+      .addCase(getEnquiries.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
         state.isSuccess = true;
-        state.enduiries = action.payload;
+        state.enquiries = action.payload;
         state.message = "success";
       })
-      .addCase(getEnduiries.rejected, (state, action) => {
+      .addCase(getEnquiries.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
@@ -42,4 +42,4 @@ export const enduirieSlice = createSlice({
       });
   },
 });
-export default enduirieSlice.reducer;
+export default enquirieSlice.reducer;

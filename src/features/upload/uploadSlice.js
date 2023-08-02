@@ -1,71 +1,78 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import brandService from "./brandServices";
+import uploadService from "./uploadService";
 
 const initialState = {
-  brands: [],
+  images: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
   message: "",
 };
-export const getBrands = createAsyncThunk(
-  "brand/get-brands",
-  async (thunkAPI) => {
+
+export const uploadImg = createAsyncThunk(
+  "upload/images",
+  async (data, thunkAPI) => {
     try {
-      return await brandService.getBrands();
+      const formData = new FormData();
+      for (let i = 0; i < data.length; i++) {
+        formData.append("images", data[i]);
+      }
+
+      return await uploadService.uploadImg(formData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
-export const createBrands = createAsyncThunk(
-  "brand/create-brands",
-  async (brandData, thunkAPI) => {
+export const delImg = createAsyncThunk(
+  "delete/images",
+  async (id, thunkAPI) => {
     try {
-      return await brandService.createBrand(brandData);
+      return await uploadService.deleteImg(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
-export const brandSlice = createSlice({
-  name: "brands",
+
+export const uploadSlice = createSlice({
+  name: "images",
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getBrands.pending, (state) => {
+      .addCase(uploadImg.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getBrands.fulfilled, (state, action) => {
+      .addCase(uploadImg.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
         state.isSuccess = true;
-        state.brands = action.payload;
+        state.images = action.payload;
         state.message = "success";
       })
-      .addCase(getBrands.rejected, (state, action) => {
+      .addCase(uploadImg.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
         state.isLoading = false;
       })
-      .addCase(createBrands.pending, (state) => {
+      .addCase(delImg.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createBrands.fulfilled, (state, action) => {
+      .addCase(delImg.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
         state.isSuccess = true;
-        state.createBrands = action.payload;
+        state.images = [];
         state.message = "success";
       })
-      .addCase(createBrands.rejected, (state, action) => {
+      .addCase(delImg.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.error;
+        state.message = action.payload;
         state.isLoading = false;
       });
   },
 });
-export default brandSlice.reducer;
+export default uploadSlice.reducer;
