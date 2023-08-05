@@ -8,7 +8,9 @@ import * as yup from "yup";
 import CustomInput from "../components/CustomInput";
 import { createCoupons, resetState } from "../features/coupon/couponSlice";
 let schema = yup.object().shape({
-  title: yup.string().required("Brand is Required"),
+  name: yup.string().required("Coupon Name is Required"),
+  expiry: yup.date().required("Expiry Date is Required"),
+  discount: yup.number().required("Discount is Required"),
 });
 const AddCoupon = () => {
   const navigate = useNavigate();
@@ -25,7 +27,9 @@ const AddCoupon = () => {
   }, [isSuccess, isError, isLoading, createdCoupons]);
   const formik = useFormik({
     initialValues: {
-      title: "",
+      name: "",
+      expiry: "",
+      discount: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -33,7 +37,6 @@ const AddCoupon = () => {
       formik.resetForm();
       setTimeout(() => {
         dispatch(resetState());
-
         navigate("/admin/coupon-list");
       }, 3000);
     },
@@ -44,15 +47,39 @@ const AddCoupon = () => {
       <form action="" onSubmit={formik.handleSubmit}>
         <CustomInput
           type="text"
-          name="title"
-          id="title"
-          label="Coupon"
-          placeholder="Coupon"
-          val={formik.values.title}
-          onCh={formik.handleChange("title")}
+          name="name"
+          id="name"
+          label="Name"
+          placeholder="Name"
+          val={formik.values.name}
+          onCh={formik.handleChange("name")}
         />
-        {formik.touched.title && formik.errors.title ? (
-          <div className="my-2 error">{formik.errors.title}</div>
+        {formik.touched.name && formik.errors.name ? (
+          <div className="my-2 error">{formik.errors.name}</div>
+        ) : null}
+        <CustomInput
+          type="date"
+          name="expiry"
+          id="expiry"
+          label="Expiry"
+          placeholder="Expiry"
+          val={formik.values.expiry}
+          onCh={formik.handleChange("expiry")}
+        />
+        {formik.touched.expiry && formik.errors.expiry ? (
+          <div className="my-2 error">{formik.errors.expiry}</div>
+        ) : null}
+        <CustomInput
+          type="number"
+          name="discount"
+          id="discount"
+          label="Discount"
+          placeholder="Discount"
+          val={formik.values.discount}
+          onCh={formik.handleChange("discount")}
+        />
+        {formik.touched.discount && formik.errors.discount ? (
+          <div className="my-2 error">{formik.errors.discount}</div>
         ) : null}
         <button type="submit" className="btn border-0 my-5 btn-success">
           Add Coupon
