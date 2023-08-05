@@ -8,7 +8,7 @@ import { createBrands } from "../features/brand/brandSlice";
 import * as yup from "yup";
 import CustomInput from "../components/CustomInput";
 let schema = yup.object().shape({
-  title: yup.string().required("Title is Required"),
+  title: yup.string().required("Brand is Required"),
 });
 const AddBrand = () => {
   const navigate = useNavigate();
