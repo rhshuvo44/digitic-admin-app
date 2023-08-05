@@ -12,6 +12,7 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
+import { RiCouponLine } from "react-icons/ri";
 import { FaBloggerB, FaClipboardList } from "react-icons/fa";
 import { ImBlog } from "react-icons/im";
 import { IoIosNotifications } from "react-icons/io";
@@ -106,6 +107,23 @@ const MainLayout = () => {
               key: "order",
               icon: <FaClipboardList className="fs-4" />,
               label: "Order",
+            },
+            {
+              key: "marketing",
+              icon: <RiCouponLine className="fs-4" />,
+              label: "Marketing",
+              children: [
+                {
+                  key: "coupon",
+                  icon: <ImBlog className="fs-4" />,
+                  label: "Add Coupon",
+                },
+                {
+                  key: "coupon-list",
+                  icon: <RiCouponLine className="fs-4" />,
+                  label: "Coupon List",
+                },
+              ],
             },
             {
               key: "blogs",

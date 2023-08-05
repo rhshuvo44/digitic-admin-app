@@ -9,6 +9,7 @@ import customerReducer from "../features/customers/customerSlice";
 import enquirieReducer from "../features/enquiries/enquirieSlice";
 import productReducer from "../features/product/productSlice";
 import uploadReducer from "../features/upload/uploadSlice";
+import couponReducer from "../features/coupon/couponSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -21,5 +22,6 @@ export const store = configureStore({
     bCategory: bCategoryReducer,
     enquirie: enquirieReducer,
     upload: uploadReducer,
+    coupon: couponReducer,
   },
 });

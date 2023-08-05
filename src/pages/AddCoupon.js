@@ -3,51 +3,51 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createBrands, resetState } from "../features/brand/brandSlice";
 
 import * as yup from "yup";
 import CustomInput from "../components/CustomInput";
+import { createCoupons, resetState } from "../features/coupon/couponSlice";
 let schema = yup.object().shape({
   title: yup.string().required("Brand is Required"),
 });
-const AddBrand = () => {
+const AddCoupon = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const newBrand = useSelector((state) => state.brand);
-  const { isSuccess, isError, isLoading, createdBrands } = newBrand;
+  const newCoupon = useSelector((state) => state.coupon);
+  const { isSuccess, isError, isLoading, createdCoupons } = newCoupon;
   useEffect(() => {
-    if (isSuccess && createdBrands) {
-      toast.success("Brand Added Successfullly!");
+    if (isSuccess && createdCoupons) {
+      toast.success("Coupon Added Successfullly!");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
     }
-  }, [isSuccess, isError, isLoading, createdBrands]);
+  }, [isSuccess, isError, isLoading, createdCoupons]);
   const formik = useFormik({
     initialValues: {
       title: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(createBrands(values));
+      dispatch(createCoupons(values));
       formik.resetForm();
       setTimeout(() => {
         dispatch(resetState());
 
-        navigate("/admin/brand-list");
+        navigate("/admin/coupon-list");
       }, 3000);
     },
   });
   return (
     <section>
-      <h3 className="mb-4 title">Add Brand</h3>
+      <h3 className="mb-4 title">Add Coupon</h3>
       <form action="" onSubmit={formik.handleSubmit}>
         <CustomInput
           type="text"
           name="title"
           id="title"
-          label="Brand"
-          placeholder="Brand"
+          label="Coupon"
+          placeholder="Coupon"
           val={formik.values.title}
           onCh={formik.handleChange("title")}
         />
@@ -55,11 +55,11 @@ const AddBrand = () => {
           <div className="my-2 error">{formik.errors.title}</div>
         ) : null}
         <button type="submit" className="btn border-0 my-5 btn-success">
-          Add Brand
+          Add Coupon
         </button>
       </form>
     </section>
   );
 };
 
-export default AddBrand;
+export default AddCoupon;

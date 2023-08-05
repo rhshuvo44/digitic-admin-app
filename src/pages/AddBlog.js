@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import CustomInput from "../components/CustomInput";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
-import { createBlog } from "../features/blog/blogSlice";
+import { createBlog, resetState } from "../features/blog/blogSlice";
 import { getBlogCategorys } from "../features/bCategory/bCategorySlice";
 let schema = yup.object().shape({
   title: yup.string().required("Title is Required"),
@@ -52,6 +52,8 @@ const AddBlog = () => {
       formik.resetForm();
 
       setTimeout(() => {
+        dispatch(resetState());
+
         navigate("/admin/blog-list");
       }, 3000);
     },

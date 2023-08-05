@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 import CustomInput from "../components/CustomInput";
-import { createColor } from "../features/color/colorSlice";
+import { createColor, resetState } from "../features/color/colorSlice";
 let schema = yup.object().shape({
   title: yup.string().required("Color is Required"),
 });
@@ -32,6 +32,8 @@ const AddColor = () => {
       dispatch(createColor(values));
       formik.resetForm();
       setTimeout(() => {
+        dispatch(resetState());
+
         navigate("/admin/color-list");
       }, 3000);
     },

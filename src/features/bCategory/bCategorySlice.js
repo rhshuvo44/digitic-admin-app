@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import bCategoryService from "./bCategoryServices";
 
 const initialState = {
@@ -28,6 +28,17 @@ export const createBlogCategory = createAsyncThunk(
     }
   }
 );
+export const deleteBlogCategory = createAsyncThunk(
+  "bCategory/delete-bCategorys",
+  async (id, thunkAPI) => {
+    try {
+      return await bCategoryService.deleteBlogCategory(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const resetState = createAction("reset-all");
 export const bCategorySlice = createSlice({
   name: "bCategorys",
   initialState: initialState,
@@ -65,7 +76,24 @@ export const bCategorySlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
         state.isLoading = false;
-      });
+      })
+      .addCase(deleteBlogCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteBlogCategory.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.deleteBlogCategory = action.payload;
+        state.message = "success";
+      })
+      .addCase(deleteBlogCategory.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      .addCase(resetState, () => initialState);
   },
 });
 export default bCategorySlice.reducer;

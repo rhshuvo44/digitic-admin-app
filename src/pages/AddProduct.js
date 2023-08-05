@@ -11,7 +11,7 @@ import { getBrands } from "../features/brand/brandSlice";
 import { getCategorys } from "../features/category/categorySlice";
 import { getColors } from "../features/color/colorSlice";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
-import { createProducts } from "../features/product/productSlice";
+import { createProducts, resetState } from "../features/product/productSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 let schema = yup.object().shape({
@@ -70,6 +70,8 @@ const AddProduct = () => {
       formik.resetForm();
       setColor(null);
       setTimeout(() => {
+        dispatch(resetState());
+
         navigate("/admin/product-list");
       }, 3000);
     },

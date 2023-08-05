@@ -19,13 +19,11 @@ import Login from "./pages/Login";
 import Order from "./pages/Order";
 import ProductList from "./pages/ProductList";
 import Resetpassword from "./pages/Resetpassword";
+import AddCoupon from "./pages/AddCoupon";
+import CouponList from "./pages/CouponList";
 
 function App() {
   return (
- 
-          
-    
-    
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/reset-password" element={<Resetpassword />} />
@@ -45,11 +43,12 @@ function App() {
         <Route path="order" element={<Order />} />
         <Route path="blog" element={<AddBlog />} />
         <Route path="blog-list" element={<BlogList />} />
+        <Route path="coupon" element={<AddCoupon />} />
+        <Route path="coupon-list" element={<CouponList />} />
         <Route path="blog-category" element={<AddBlogCat />} />
         <Route path="blog-category-list" element={<BlogCategoryList />} />
       </Route>
     </Routes>
-   
   );
 }
 

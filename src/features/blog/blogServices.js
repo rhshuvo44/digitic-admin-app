@@ -10,8 +10,13 @@ const createBlog = async (blogData) => {
   const response = await axios.post(`${base_url}blog/`, blogData, config);
   return response.data;
 };
+// const deleteBlogCategory = async (blogData) => {
+//   const response = await axios.post(`${base_url}blog/`, blogData, config);
+//   return response.data;
+// };
 const blogService = {
   getBlogs,
   createBlog,
+  // deleteBlogCategory
 };
 export default blogService;

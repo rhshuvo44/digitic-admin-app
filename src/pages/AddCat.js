@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CustomInput from "../components/CustomInput";
 import * as yup from "yup";
 import { toast } from "react-toastify";
-import { createCategory } from "../features/category/categorySlice";
+import { createCategory, resetState } from "../features/category/categorySlice";
 
 let schema = yup.object().shape({
   title: yup.string().required("Category is Required"),
@@ -32,6 +32,8 @@ const AddCat = () => {
       dispatch(createCategory(values));
       formik.resetForm();
       setTimeout(() => {
+        dispatch(resetState());
+
         navigate("/admin/category-list");
       }, 3000);
     },

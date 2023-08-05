@@ -15,8 +15,13 @@ const createBlogCategory = async (category) => {
 
   return response.data;
 };
+const deleteBlogCategory = async (id) => {
+  const response = await axios.post(`${base_url}blogCategory/${id}`, config);
+  return response.data;
+};
 const bCategoryService = {
   getBlogCategorys,
   createBlogCategory,
+  deleteBlogCategory,
 };
 export default bCategoryService;
