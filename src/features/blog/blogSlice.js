@@ -15,6 +15,16 @@ export const getBlogs = createAsyncThunk("blog/get-blogs", async (thunkAPI) => {
     return thunkAPI.rejectWithValue(error);
   }
 });
+export const createBlog = createAsyncThunk(
+  "blog/create-blogs",
+  async (bloginfo, thunkAPI) => {
+    try {
+      return await blogService.createBlog(bloginfo);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const blogSlice = createSlice({
   name: "blogs",
   initialState: initialState,
@@ -32,6 +42,22 @@ export const blogSlice = createSlice({
         state.message = "success";
       })
       .addCase(getBlogs.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      .addCase(createBlog.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createBlog.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.createdBlog = action.payload;
+        state.message = "success";
+      })
+      .addCase(createBlog.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;

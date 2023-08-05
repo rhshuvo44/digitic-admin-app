@@ -77,7 +77,7 @@ const AddProduct = () => {
   const img = [];
   imagesState?.forEach((i, j) => {
     img.push({
-      public_id: j.public_id,
+      public_id: i.public_id,
       url: i.url,
     });
   });
