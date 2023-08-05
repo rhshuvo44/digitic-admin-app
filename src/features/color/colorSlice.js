@@ -18,6 +18,16 @@ export const getColors = createAsyncThunk(
     }
   }
 );
+export const createColor = createAsyncThunk(
+  "color/create-colors",
+  async (colorData, thunkAPI) => {
+    try {
+      return await colorService.createColor(colorData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const colorSlice = createSlice({
   name: "colors",
   initialState: initialState,
@@ -35,6 +45,22 @@ export const colorSlice = createSlice({
         state.message = "success";
       })
       .addCase(getColors.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      .addCase(createColor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createColor.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.createdColor = action.payload;
+        state.message = "success";
+      })
+      .addCase(createColor.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
