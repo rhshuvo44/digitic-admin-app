@@ -42,7 +42,7 @@ const AddProduct = () => {
     (state) => state?.category?.categorys?.getallCategory
   );
   const newProduct = useSelector((state) => state.product);
-  const { isSuccess, isError, isLoading ,createProduct} = newProduct;
+  const { isSuccess, isError, isLoading, createProduct } = newProduct;
   useEffect(() => {
     if (isSuccess && createProduct) {
       toast.success("Product Added Successfullly!");
@@ -50,8 +50,7 @@ const AddProduct = () => {
     if (isError) {
       toast.error("Something Went Wrong!");
     }
-  }, [isSuccess, isError, isLoading,createProduct]);
- 
+  }, [isSuccess, isError, isLoading, createProduct]);
 
   const formik = useFormik({
     initialValues: {
@@ -94,7 +93,6 @@ const AddProduct = () => {
     });
   });
 
-  
   return (
     <section>
       <h3 className="mb-4 title">Add New Product</h3>

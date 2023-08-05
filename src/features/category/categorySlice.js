@@ -18,6 +18,16 @@ export const getCategorys = createAsyncThunk(
     }
   }
 );
+export const createCategory = createAsyncThunk(
+  "category/create-category",
+  async (category, thunkAPI) => {
+    try {
+      return await categoryService.createCategory(category);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const categorySlice = createSlice({
   name: "categorys",
   initialState: initialState,
@@ -35,6 +45,22 @@ export const categorySlice = createSlice({
         state.message = "success";
       })
       .addCase(getCategorys.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      .addCase(createCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createCategory.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.createdCategory = action.payload;
+        state.message = "success";
+      })
+      .addCase(createCategory.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
