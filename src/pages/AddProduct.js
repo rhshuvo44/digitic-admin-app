@@ -81,10 +81,12 @@ const AddProduct = () => {
       url: i.url,
     });
   });
-  useEffect(() => {
-    formik.values.color = color ? color : "";
-    formik.values.image = img;
-  }, [formik.values, color, img]);
+  formik.values.color = color ? color : "";
+  formik.values.image = img;
+  // useEffect(() => {
+  //   formik.values.color = color ? color : "";
+  //   formik.values.image = img;
+  // }, [formik.values, color, img]);
   const coloropt = [];
   colorState?.forEach((i, j) => {
     coloropt.push({
