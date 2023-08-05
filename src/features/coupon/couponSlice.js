@@ -8,7 +8,7 @@ const initialState = {
   isSuccess: false,
   message: "",
 };
-export const getCoupons = createAsyncThunk(
+export const getAllCoupon = createAsyncThunk(
   "coupon/get-coupons",
   async (thunkAPI) => {
     try {
@@ -29,23 +29,24 @@ export const createCoupons = createAsyncThunk(
   }
 );
 export const resetState = createAction("reset-all");
+
 export const couponSlice = createSlice({
   name: "coupons",
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCoupons.pending, (state) => {
+      .addCase(getAllCoupon.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getCoupons.fulfilled, (state, action) => {
+      .addCase(getAllCoupon.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
         state.isSuccess = true;
         state.coupons = action.payload;
         state.message = "success";
       })
-      .addCase(getCoupons.rejected, (state, action) => {
+      .addCase(getAllCoupon.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;

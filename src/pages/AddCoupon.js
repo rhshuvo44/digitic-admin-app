@@ -1,7 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import * as yup from "yup";
@@ -13,7 +12,7 @@ let schema = yup.object().shape({
   discount: yup.number().required("Discount is Required"),
 });
 const AddCoupon = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const newCoupon = useSelector((state) => state.coupon);
   const { isSuccess, isError, isLoading, createdCoupons } = newCoupon;
@@ -33,11 +32,12 @@ const AddCoupon = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
+      console.log(values);
       dispatch(createCoupons(values));
       formik.resetForm();
       setTimeout(() => {
         dispatch(resetState());
-        navigate("/admin/coupon-list");
+        // navigate("/admin/coupon-list");
       }, 3000);
     },
   });
@@ -49,8 +49,8 @@ const AddCoupon = () => {
           type="text"
           name="name"
           id="name"
-          label="Name"
-          placeholder="Name"
+          label="Coupon Name"
+          placeholder="Coupon Name"
           val={formik.values.name}
           onCh={formik.handleChange("name")}
         />
