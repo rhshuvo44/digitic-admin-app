@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getColors } from "../features/color/colorSlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
 const columns = [
   {
     title: "SNo",
@@ -34,14 +35,19 @@ const ColorList = () => {
       name: colorState[i].title,
       action: (
         <>
-          <BiEdit
-            className="text-success fs-5 me-2"
+          <Link to={`/admin/color/${colorState[i]._id}`}>
+            <BiEdit
+              className="text-success fs-5 me-2"
+              style={{ cursor: "pointer" }}
+            />
+          </Link>
+          <button
+            // onClick={() => showModal(colorState[i]._id)}
+            className="bg-transparent border-0 text-danger fs-5"
             style={{ cursor: "pointer" }}
-          />
-          <AiFillDelete
-            className="text-danger fs-5"
-            style={{ cursor: "pointer" }}
-          />
+          >
+            <AiFillDelete />
+          </button>
         </>
       ),
     });

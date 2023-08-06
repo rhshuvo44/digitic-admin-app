@@ -4,7 +4,7 @@ import React from "react";
 const CustomModal = ({ open, hideModal, performAction, title }) => {
   return (
     <Modal
-      title=""
+      title="Confirmation"
       open={open}
       onOk={performAction}
       onCancel={hideModal}
