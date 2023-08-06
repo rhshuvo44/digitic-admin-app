@@ -1,10 +1,14 @@
 import { Table } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategorys } from "../features/category/categorySlice";
+import {
+  deleteACategory,
+  getCategorys,
+} from "../features/category/categorySlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 const columns = [
   {
     title: "SNo",
@@ -23,6 +27,15 @@ const columns = [
 
 const CategoryList = () => {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [catId, setCatId] = useState("");
+  const showModal = (id) => {
+    setOpen(true);
+    setCatId(id);
+  };
+  const hideModal = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     dispatch(getCategorys());
   }, [dispatch]);
@@ -42,20 +55,36 @@ const CategoryList = () => {
               style={{ cursor: "pointer" }}
             />
           </Link>
-          <AiFillDelete
-            className="text-danger fs-5"
+          <button
+            onClick={() => showModal(categoryState[i]._id)}
+            className="bg-transparent border-0 text-danger fs-5"
             style={{ cursor: "pointer" }}
-          />
+          >
+            <AiFillDelete />
+          </button>
         </>
       ),
     });
   }
+  const deleteCat = (id) => {
+    dispatch(deleteACategory(id));
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(getCategorys());
+    }, 1000);
+  };
   return (
     <section>
       <h3 className="mb-4 title">Category List</h3>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
+      <CustomModal
+        performAction={() => deleteCat(catId)}
+        hideModal={hideModal}
+        open={open}
+        title="Are you sure you want to delete this brand?"
+      />
     </section>
   );
 };
