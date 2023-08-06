@@ -42,7 +42,7 @@ const AddColor = () => {
       toast.success("Color Added Successfullly!");
     }
     if (isSuccess && updatedColor) {
-      toast.success("Brand update Successfullly!");
+      toast.success("Color update Successfullly!");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
