@@ -30,7 +30,7 @@ const updateBlogCategory = async (blogCategory) => {
 };
 
 const deleteBlogCategory = async (id) => {
-  const response = await axios.post(`${base_url}blogCategory/${id}`, config);
+  const response = await axios.delete(`${base_url}blogCategory/${id}`, config);
   return response.data;
 };
 const bCategoryService = {

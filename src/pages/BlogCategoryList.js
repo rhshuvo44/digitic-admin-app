@@ -1,10 +1,14 @@
 import { Table } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogCategorys } from "../features/bCategory/bCategorySlice";
+import {
+  deleteBlogCategory,
+  getBlogCategorys,
+} from "../features/bCategory/bCategorySlice";
 import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 const columns = [
   {
     title: "SNo",
@@ -22,6 +26,15 @@ const columns = [
 ];
 const BlogCategoryList = () => {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [bcatId, setBCatId] = useState("");
+  const showModal = (id) => {
+    setOpen(true);
+    setBCatId(id);
+  };
+  const hideModal = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     dispatch(getBlogCategorys());
   }, [dispatch]);
@@ -42,7 +55,7 @@ const BlogCategoryList = () => {
             />
           </Link>
           <button
-            // onClick={() => showModal(bCategoryState[i]._id)}
+            onClick={() => showModal(bCategoryState[i]._id)}
             className="bg-transparent border-0 text-danger fs-5"
             style={{ cursor: "pointer" }}
           >
@@ -52,12 +65,25 @@ const BlogCategoryList = () => {
       ),
     });
   }
+  const deleteBrand = (id) => {
+    dispatch(deleteBlogCategory(id));
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(getBlogCategorys());
+    }, 1000);
+  };
   return (
     <section>
       <h3 className="mb-4 title">Blog Category List</h3>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
+      <CustomModal
+        performAction={() => deleteBrand(bcatId)}
+        hideModal={hideModal}
+        open={open}
+        title="Are you sure you want to delete this brand?"
+      />
     </section>
   );
 };
