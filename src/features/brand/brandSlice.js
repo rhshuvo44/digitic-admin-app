@@ -18,21 +18,22 @@ export const getBrands = createAsyncThunk(
     }
   }
 );
-export const getABrand = createAsyncThunk(
-  "brand/get-brand",
-  async (id, thunkAPI) => {
-    try {
-      return await brandService.getBrand(id);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
+
 export const createBrands = createAsyncThunk(
   "brand/create-brands",
   async (brandData, thunkAPI) => {
     try {
       return await brandService.createBrand(brandData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getABrand = createAsyncThunk(
+  "brand/get-brand",
+  async (id, thunkAPI) => {
+    try {
+      return await brandService.getBrand(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
