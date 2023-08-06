@@ -55,7 +55,7 @@ const CouponList = () => {
       discount: couponState[i].discount,
       action: (
         <>
-          <Link to={`/admin/brand/${couponState[i]._id}`}>
+          <Link to={`/admin/coupon/${couponState[i]._id}`}>
             <BiEdit
               className="text-success fs-5 me-2"
               style={{ cursor: "pointer" }}
