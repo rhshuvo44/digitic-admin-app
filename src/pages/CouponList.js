@@ -40,7 +40,7 @@ const CouponList = () => {
     data.push({
       key: i + 1,
       name: couponState[i].name,
-      expiry: couponState[i].expiry,
+      expiry: new Date(couponState[i].expiry).toLocaleString(),
       discount: couponState[i].discount,
       action: (
         <>
