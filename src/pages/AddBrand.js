@@ -62,12 +62,12 @@ const AddBrand = () => {
         dispatch(resetState());
       } else {
         dispatch(createBrands(values));
-        formik.resetForm();
-        setTimeout(() => {
-          dispatch(resetState());
-          navigate("/admin/brand-list");
-        }, 3000);
       }
+      formik.resetForm();
+      setTimeout(() => {
+        dispatch(resetState());
+        navigate("/admin/brand-list");
+      }, 3000);
     },
   });
   return (
