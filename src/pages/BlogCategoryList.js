@@ -65,7 +65,7 @@ const BlogCategoryList = () => {
       ),
     });
   }
-  const deleteBrand = (id) => {
+  const deleteBCat = (id) => {
     dispatch(deleteBlogCategory(id));
     setOpen(false);
     setTimeout(() => {
@@ -79,7 +79,7 @@ const BlogCategoryList = () => {
         <Table columns={columns} dataSource={data} />
       </div>
       <CustomModal
-        performAction={() => deleteBrand(bcatId)}
+        performAction={() => deleteBCat(bcatId)}
         hideModal={hideModal}
         open={open}
         title="Are you sure you want to delete this brand?"
