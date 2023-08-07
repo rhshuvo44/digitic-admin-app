@@ -1,9 +1,11 @@
 import { Table } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../features/product/productSlice";
+import { deleteAProduct, getProducts } from "../features/product/productSlice";
+import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 const columns = [
   {
     title: "SNo",
@@ -41,6 +43,15 @@ const columns = [
 
 const ProductList = () => {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [productId, setProductId] = useState("");
+  const showModal = (id) => {
+    setOpen(true);
+    setProductId(id);
+  };
+  const hideModal = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -57,25 +68,42 @@ const ProductList = () => {
       color: productState[i].color + " ",
       action: (
         <>
-          <BiEdit
-            className="text-success fs-5 me-2"
+          <Link to={`/admin/product/${productState[i]._id}`}>
+            <BiEdit
+              className="text-success fs-5 me-2"
+              style={{ cursor: "pointer" }}
+            />
+          </Link>
+          <button
+            onClick={() => showModal(productState[i]._id)}
+            className="bg-transparent border-0 text-danger fs-5"
             style={{ cursor: "pointer" }}
-          />
-          <AiFillDelete
-            className="text-danger fs-5"
-            style={{ cursor: "pointer" }}
-          />
+          >
+            <AiFillDelete />
+          </button>
         </>
       ),
     });
   }
-  console.log(data);
+  const deleteProduct = (id) => {
+    dispatch(deleteAProduct(id));
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(getProducts());
+    }, 1000);
+  };
   return (
     <section>
       <h3 className="mb-4 title">Product List</h3>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
+      <CustomModal
+        performAction={() => deleteProduct(productId)}
+        hideModal={hideModal}
+        open={open}
+        title="Are you sure you want to delete this product?"
+      />
     </section>
   );
 };

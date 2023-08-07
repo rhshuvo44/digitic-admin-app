@@ -9,10 +9,20 @@ const initialState = {
   message: "",
 };
 export const getEnquiries = createAsyncThunk(
-  "enduirie/get-enduiries",
+  "enduirie/get-enquiries",
   async (thunkAPI) => {
     try {
       return await enquirieService.getEnquiries();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const deleteEnquiries = createAsyncThunk(
+  "enduirie/delete-enqiries",
+  async (id, thunkAPI) => {
+    try {
+      return await enquirieService.deleteEnquirie(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -35,6 +45,22 @@ export const enquirieSlice = createSlice({
         state.message = "success";
       })
       .addCase(getEnquiries.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      .addCase(deleteEnquiries.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteEnquiries.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.deletedEnquiries = action.payload;
+        state.message = "success";
+      })
+      .addCase(deleteEnquiries.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;

@@ -1,8 +1,13 @@
 import { Table } from "antd";
-import React, { useEffect } from "react";
-import { AiFillDelete } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { AiFillDelete, AiOutlineEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { getEnquiries } from "../features/enquiries/enquirieSlice";
+import {
+  deleteEnquiries,
+  getEnquiries,
+} from "../features/enquiries/enquirieSlice";
+import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 const columns = [
   {
     title: "SNo",
@@ -33,38 +38,72 @@ const columns = [
 ];
 const Enquiries = () => {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [enqtId, setenqtId] = useState("");
+  const showModal = (id) => {
+    setOpen(true);
+    setenqtId(id);
+  };
+  const hideModal = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     dispatch(getEnquiries());
   }, [dispatch]);
-  const enduirieState = useSelector(
-    (state) => state?.enduirie?.enduiries.getallEnquiry
+  const enquirieState = useSelector(
+    (state) => state?.enquirie?.enquiries.getallEnquiry
   );
   const data = [];
-  for (let i = 0; i < enduirieState?.length; i++) {
+  for (let i = 0; i < enquirieState?.length; i++) {
     data.push({
       key: i + 1,
-      name: enduirieState[i].name,
-      email: enduirieState[i].email,
-      mobile: enduirieState[i].mobile,
+      name: enquirieState[i].name,
+      email: enquirieState[i].email,
+      mobile: enquirieState[i].mobile,
       status: (
         <select name="" id="" className="form-control form-select">
           <option value="">pending</option>
         </select>
       ),
       action: (
-        <AiFillDelete
-          className="text-danger fs-5"
-          style={{ cursor: "pointer" }}
-        />
+        <>
+          <Link
+            to=""
+            className="text-danger fs-5"
+            style={{ cursor: "pointer" }}
+          >
+            <AiOutlineEye />
+          </Link>
+          <button
+            onClick={() => showModal(enquirieState[i]._id)}
+            className="bg-transparent border-0 text-danger fs-5"
+            style={{ cursor: "pointer" }}
+          >
+            <AiFillDelete />
+          </button>
+        </>
       ),
     });
   }
+  const deleteEnquirie = (id) => {
+    dispatch(deleteEnquiries(id));
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(getEnquiries());
+    }, 1000);
+  };
   return (
     <section>
       <h3 className="mb-4 title">Enquiries</h3>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
+      <CustomModal
+        performAction={() => deleteEnquirie(enqtId)}
+        hideModal={hideModal}
+        open={open}
+        title="Are you sure you want to delete this product?"
+      />
     </section>
   );
 };

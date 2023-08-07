@@ -33,6 +33,7 @@ function App() {
         <Route path="enquiries" element={<Enquiries />} />
         <Route path="customer" element={<Customer />} />
         <Route path="product" element={<AddProduct />} />
+        <Route path="product/:id" element={<AddProduct />} />
         <Route path="product-list" element={<ProductList />} />
         <Route path="brand" element={<AddBrand />} />
         <Route path="brand/:id" element={<AddBrand />} />
@@ -45,6 +46,7 @@ function App() {
         <Route path="category-list" element={<CategoryList />} />
         <Route path="order" element={<Order />} />
         <Route path="blog" element={<AddBlog />} />
+        <Route path="blog/:id" element={<AddBlog />} />
         <Route path="blog-list" element={<BlogList />} />
         <Route path="coupon" element={<AddCoupon />} />
         <Route path="coupon/:id" element={<AddCoupon />} />
