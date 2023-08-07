@@ -20,6 +20,13 @@ const AddCat = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const getCatIt = location.pathname.split("/")[3];
+  useEffect(() => {
+    if (getCatIt !== undefined) {
+      dispatch(getACategory(getCatIt));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getCatIt, dispatch]);
   const newCategory = useSelector((state) => state.category);
   const {
     isSuccess,
@@ -29,13 +36,7 @@ const AddCat = () => {
     updatedCategory,
     categoryName,
   } = newCategory;
-  useEffect(() => {
-    if (getCatIt !== undefined) {
-      dispatch(getACategory(getCatIt));
-    } else {
-      dispatch(resetState());
-    }
-  }, [getCatIt, dispatch]);
+
   useEffect(() => {
     if (isSuccess && createdCategory) {
       toast.success("Category Added Successfullly!");

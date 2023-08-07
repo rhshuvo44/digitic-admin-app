@@ -19,7 +19,13 @@ const AddBlogCat = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const getBCatIt = location.pathname.split("/")[3];
-  console.log(getBCatIt);
+  useEffect(() => {
+    if (getBCatIt !== undefined) {
+      dispatch(getABlogCategory(getBCatIt));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getBCatIt, dispatch]);
   const newBCategory = useSelector((state) => state.bCategory);
   const {
     isSuccess,
@@ -29,13 +35,7 @@ const AddBlogCat = () => {
     updatedBlogCategory,
     blogCategoryName,
   } = newBCategory;
-  useEffect(() => {
-    if (getBCatIt !== undefined) {
-      dispatch(getABlogCategory(getBCatIt));
-    } else {
-      dispatch(resetState());
-    }
-  }, [getBCatIt, dispatch]);
+
   useEffect(() => {
     if (isSuccess && createdCategory) {
       toast.success("Blog Category Added Successfullly!");

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteEnquiries,
   getEnquiries,
+  updateEnquiries,
 } from "../features/enquiries/enquirieSlice";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
@@ -61,8 +62,19 @@ const Enquiries = () => {
       email: enquirieState[i].email,
       mobile: enquirieState[i].mobile,
       status: (
-        <select name="" id="" className="form-control form-select">
-          <option value="">pending</option>
+        <select
+          name=""
+          defaultValue={
+            enquirieState[i].status ? enquirieState[i].status : "Submitted"
+          }
+          onChange={(e) => setEnqStatus(e.target.value, enquirieState[i]._id)}
+          id=""
+          className="form-control form-select"
+        >
+          <option value="Submitted">Submitted</option>
+          <option value="Contacted">Contacted</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Resolved">Resolved</option>
         </select>
       ),
       action: (
@@ -85,6 +97,16 @@ const Enquiries = () => {
       ),
     });
   }
+  const setEnqStatus = (status, id) => {
+    const data = {
+      id: id,
+      enqData: status,
+    };
+    dispatch(updateEnquiries(data));
+    setTimeout(() => {
+      dispatch(getEnquiries());
+    }, 1000);
+  };
   const deleteEnquirie = (id) => {
     dispatch(deleteEnquiries(id));
     setOpen(false);
