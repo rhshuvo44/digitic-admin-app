@@ -21,6 +21,7 @@ import ProductList from "./pages/ProductList";
 import Resetpassword from "./pages/Resetpassword";
 import AddCoupon from "./pages/AddCoupon";
 import CouponList from "./pages/CouponList";
+import EnqView from "./pages/EnqView";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <Route path="admin" element={<MainLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="enquiries" element={<Enquiries />} />
+        <Route path="enquiries/:id" element={<EnqView />} />
         <Route path="customer" element={<Customer />} />
         <Route path="product" element={<AddProduct />} />
         <Route path="product/:id" element={<AddProduct />} />

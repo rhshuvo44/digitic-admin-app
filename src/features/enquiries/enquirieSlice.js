@@ -9,10 +9,20 @@ const initialState = {
   message: "",
 };
 export const getEnquiries = createAsyncThunk(
-  "enduirie/get-enquiries",
+  "enquirie/get-enquiries",
   async (thunkAPI) => {
     try {
       return await enquirieService.getEnquiries();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getAEnquirie = createAsyncThunk(
+  "enquirie/get-enquirie",
+  async (id, thunkAPI) => {
+    try {
+      return await enquirieService.getEnquirie(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -45,6 +55,22 @@ export const enquirieSlice = createSlice({
         state.message = "success";
       })
       .addCase(getEnquiries.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      .addCase(getAEnquirie.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAEnquirie.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.enquirieName = action.payload;
+        state.message = "success";
+      })
+      .addCase(getAEnquirie.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;

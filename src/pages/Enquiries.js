@@ -68,7 +68,7 @@ const Enquiries = () => {
       action: (
         <>
           <Link
-            to=""
+            to={`/admin/enquiries/${enquirieState[i]._id}`}
             className="text-danger fs-5"
             style={{ cursor: "pointer" }}
           >

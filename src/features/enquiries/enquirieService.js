@@ -6,6 +6,10 @@ const getEnquiries = async () => {
   const response = await axios.get(`${base_url}enquiry`);
   return response.data;
 };
+const getEnquirie = async (id) => {
+  const response = await axios.get(`${base_url}enquiry/${id}`);
+  return response.data;
+};
 const deleteEnquirie = async (id) => {
   const response = await axios.delete(`${base_url}enquiry/${id}`, config);
   return response.data;
@@ -13,6 +17,7 @@ const deleteEnquirie = async (id) => {
 
 const enquirieService = {
   getEnquiries,
+  getEnquirie,
   deleteEnquirie,
 };
 export default enquirieService;
